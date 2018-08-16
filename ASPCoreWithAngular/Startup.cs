@@ -1,3 +1,4 @@
+using ASPCoreWithAngular.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,9 @@ namespace ASPCoreWithAngular
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            // Add application services.
+            services.AddTransient<IRoleDataAccessLayer, RoleDataAccessLayer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

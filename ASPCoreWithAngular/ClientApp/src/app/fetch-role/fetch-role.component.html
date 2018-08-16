@@ -1,0 +1,21 @@
+<h1>Role Data</h1>
+
+<p>This component demonstrates fetching Role data from the server.</p>
+
+<p *ngIf="!roleList"><em>Loading...</em></p>
+
+<table class='table' *ngIf="roleList">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let role of roleList">
+      <td>{{ role.roleId }}</td>
+      <td>{{ role.roleName }}</td>
+      <td>
+    </tr>
+  </tbody>
+</table>  
