@@ -4,6 +4,10 @@
 
 <p *ngIf="!roleList"><em>Loading...</em></p>
 
+<edit-role-modal></edit-role-modal>
+
+<button (click)="ngxSmartModalService.getModal('popupOne').open()">Edit Role</button>
+
 <table class='table' *ngIf="roleList">
   <thead>
     <tr>
@@ -18,4 +22,4 @@
       <td>
     </tr>
   </tbody>
-</table>  
+</table>

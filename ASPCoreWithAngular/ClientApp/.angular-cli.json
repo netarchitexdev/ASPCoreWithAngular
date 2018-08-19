@@ -19,6 +19,7 @@
       "prefix": "app",
       "styles": [
         "styles.css",
+        "../node_modules/ngx-smart-modal/ngx-smart-modal.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
       "scripts": [],
