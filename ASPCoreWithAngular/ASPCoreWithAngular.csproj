@@ -30,13 +30,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\edit-role-modal\edit-role-modal.component.ts" />
+    <None Remove="ClientApp\src\app\add-role-modal\add-role-modal.component.ts" />
     <None Remove="ClientApp\src\app\fetch-role\fetch-Role.component.ts" />
     <None Remove="ClientApp\src\app\services\role.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\edit-role-modal\edit-role-modal.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\add-role-modal\add-role-modal.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\fetch-role\fetch-role.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\role.service.ts" />
   </ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASPCoreWithAngular.Models
@@ -10,89 +9,46 @@ namespace ASPCoreWithAngular.Models
     {
         CrspPortalDataSandboxContext db = new CrspPortalDataSandboxContext();
 
-        //public IEnumerable<Role> GetAllRoles()
-        //{
-        //    try
-        //    {
-        //        return db.Role.ToList();
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //}
+        // Gets all roles
         public async Task<IEnumerable<Role>> GetAllRoles()
         {
-            try
-            {
-                var roles = await db.Role.ToListAsync();
-                return roles;
-            }
-            catch
-            {
-                throw;
-            }
+            var roles = await db.Role.ToListAsync();
+            return roles;
         }
 
-        //To Add new role record   
-        public int AddRole(Role role)
+        // Adds a new role   
+        public async Task<bool> AddRole(Role role)
         {
-            try
-            {
-                db.Role.Add(role);
-                db.SaveChanges();
-                return 1;
-            }
-            catch
-            {
-                throw;
-            }
+            db.Role.Add(role);
+            return await db.SaveChangesAsync() == 1 ? true : false;
         }
 
-        //To Update the records of a particluar role  
-        public int UpdateRole(Role role)
+        // Updates a particluar role  
+        public async Task<bool> UpdateRole(Role role)
         {
-            try
-            {
-                db.Entry(role).State = EntityState.Modified;
-                db.SaveChanges();
-
-                return 1;
-            }
-            catch
-            {
-                throw;
-            }
+            db.Entry(role).State = EntityState.Modified;
+            return await db.SaveChangesAsync() == 1 ? true : false;
         }
 
-        //Get the details of a particular role  
-        public async Task<Role> GetRoleData(Guid id)
+        // Gets the details of a particular role  
+        public async Task<Role> GetRole(Guid id)
         {
-            try
-            {
-                Role role = db.Role.Find(id);
-                return role;
-            }
-            catch
-            {
-                throw;
-            }
+            return await db.Role.FindAsync(id);
         }
 
-        //To Delete the record of a particular role  
-        public int DeleteRole(int id)
+        // Deletes a particular role  
+        public async Task<bool> DeleteRole(Guid id)
         {
-            try
-            {
-                Role emp = db.Role.Find(id);
-                db.Role.Remove(emp);
-                db.SaveChanges();
-                return 1;
-            }
-            catch
-            {
-                throw;
-            }
+            Role role = await db.Role.FindAsync(id);
+            if (role == null) return false;
+            db.Role.Remove(role);
+            return await db.SaveChangesAsync() == 1 ? true : false;
+        }
+
+        // Checks if role exists
+        public async Task<bool> RoleExists(Guid id)
+        {
+            return await db.Role.AnyAsync(e => e.RoleId == id);
         }
     }
 }

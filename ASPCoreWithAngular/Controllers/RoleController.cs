@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ASPCoreWithAngular.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASPCoreWithAngular.Controllers
@@ -83,34 +82,37 @@ namespace ASPCoreWithAngular.Controllers
         //    return NoContent();
         //}
 
-        //// POST: api/Roles
-        //[HttpPost]
-        //public async Task<IActionResult> PostRole([FromBody] Role role)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        /// <summary>
+        /// Updates a role.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> PostRole([FromBody] Role role)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            try
+            {
+                await Task.Run(() => _db.AddRole(role));
+            }
+            catch (Exception)
+            {
+                if (await RoleExists(role.RoleId))
+                {
+                    return new StatusCodeResult(StatusCodes.Status409Conflict);
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    _context.Role.Add(role);
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (RoleExists(role.RoleId))
-        //        {
-        //            return new StatusCodeResult(StatusCodes.Status409Conflict);
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtAction("GetRole", new { id = role.RoleId }, role);
-        //}
+            return CreatedAtAction("GetRole", new { id = role.RoleId }, role);
+        }
 
         //// DELETE: api/Roles/5
         //[HttpDelete("{id}")]
@@ -133,9 +135,14 @@ namespace ASPCoreWithAngular.Controllers
         //    return Ok(role);
         //}
 
-        //private bool RoleExists(Guid id)
-        //{
-        //    return _context.Role.Any(e => e.RoleId == id);
-        //}
+        /// <summary>
+        /// Checks if task exists.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private async Task<bool> RoleExists(Guid id)
+        {
+            return await _db.RoleExists(id);
+        }
     }
 }

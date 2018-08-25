@@ -1,12 +1,30 @@
 <h1>Role Data</h1>
 
-<p>This component demonstrates fetching Role data from the server.</p>
+<!--<p *ngIf="!roleList"></p>-->
 
-<p *ngIf="!roleList"><em>Loading...</em></p>
+<ngx-smart-modal #addRoleModal identifier="addRoleModal">
+  <h1>Add Role</h1>
 
-<edit-role-modal></edit-role-modal>
+  <!--<div *ngIf="addRoleModal.hasData()">
+    <pre>{{ addRoleModal.getData() | json }}</pre>
+  </div>-->
 
-<button (click)="ngxSmartModalService.getModal('popupOne').open()">Edit Role</button>
+  <div>
+    <div>
+      <div>
+        <label class="col-md-4">Role Name</label>
+        <input type="text" class="form-control" name="role_name" value="{{newRole.roleName}}" (change)="updateRole()" />
+      </div>
+      <div>
+        <button class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="addRoleModal.close()">Close</button>
+</ngx-smart-modal>
+
+<button (click)="addRoleModal.open()">Add</button>
 
 <table class='table' *ngIf="roleList">
   <thead>

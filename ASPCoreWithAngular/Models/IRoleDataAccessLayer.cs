@@ -6,10 +6,11 @@ namespace ASPCoreWithAngular.Models
 {
     public interface IRoleDataAccessLayer
     {
-        //int AddRole(Role role);
-        //int DeleteRole(int id);
+        Task<bool> AddRole(Role role);
+        Task<bool> DeleteRole(Guid id);
+        Task<bool> UpdateRole(Role role);
         Task<IEnumerable<Role>> GetAllRoles();
-        //Task<Role> GetRoleData(Guid id);
-        //int UpdateRole(Role role);
+        Task<Role> GetRole(Guid id);
+        Task<bool> RoleExists(Guid id);
     }
 }

@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { FetchRoleComponent } from './fetch-role/fetch-role.component';
-import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
+import { AddRoleModalComponent } from './add-role-modal/add-role-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.compon
     CounterComponent,
     FetchDataComponent,
     FetchRoleComponent,
-    EditRoleModalComponent
+    AddRoleModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
