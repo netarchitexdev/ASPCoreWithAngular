@@ -20,7 +20,7 @@ namespace ASPCoreWithAngular.Controllers
         /// Get all roles.
         /// </summary>
         /// <returns></returns>
-        [HttpGet("[action]")]
+        [HttpGet]
         public async Task<IActionResult> GetRoles()
         {
             var roles = await _db.GetAllRoles();

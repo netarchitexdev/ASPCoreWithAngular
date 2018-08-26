@@ -3,39 +3,30 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { FetchRoleComponent } from './fetch-role/fetch-role.component';
-import { AddRoleModalComponent } from './add-role-modal/add-role-modal.component';
+import { RolesComponent } from './roles/roles.component';
+import { RoleService } from './role.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    FetchRoleComponent,
-    AddRoleModalComponent
+    RolesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    NgxSmartModalModule.forRoot(),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'fetch-role', component: FetchRoleComponent },
+      { path: 'roles', component: RolesComponent }
     ])
   ],
-  providers: [NgxSmartModalService],
+  providers: [RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

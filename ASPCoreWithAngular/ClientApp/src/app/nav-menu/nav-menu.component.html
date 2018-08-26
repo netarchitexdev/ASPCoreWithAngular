@@ -16,20 +16,10 @@
               <a [routerLink]='["/"]' (click)='collapse()'>
                 <span class='glyphicon glyphicon-home'></span> Home
               </a>
-            </li>
+            </li>            
             <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/counter"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-education'></span> Counter
-              </a>
-            </li>
-            <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-th-list'></span> Fetch data
-              </a>
-            </li>
-            <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/fetch-role"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-th-list'></span> Fetch Roles
+              <a [routerLink]='["/roles"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-th-list'></span> Roles
               </a>
             </li>
           </ul>
