@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { RolesComponent } from './roles/roles.component';
 import { RoleService } from './role.service';
+import { ErrorsHandler } from './errors.handler.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,14 @@ import { RoleService } from './role.service';
       { path: 'roles', component: RolesComponent }
     ])
   ],
-  providers: [RoleService],
+  //providers: [RoleService, ErrorHandler],
+  providers: [
+    {
+      provide: [ErrorHandler],
+      useClass: ErrorsHandler
+    },
+    [RoleService]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

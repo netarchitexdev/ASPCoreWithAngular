@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from '../role.service';
+import { RoleService, IRole } from '../role.service';
 
 @Component({
   selector: 'app-roles',
@@ -8,14 +8,24 @@ import { RoleService } from '../role.service';
 })
 export class RolesComponent implements OnInit {
 
-  roles$: Object;
+  role: IRole;
 
-  constructor(private roleService: RoleService) { }
+  selectedRole: IRole;
+
+  newRole: boolean;
+
+  //public roles: IRole[] = [];
+
+  cols: any[];
+
+  public roles: Array<any>;
+
+  constructor(private roleService: RoleService) {
+  }
 
   ngOnInit() {
-    this.roleService.getRoles().subscribe(
-      roles => this.roles$ = roles
-    )
+    this.roleService.get()
+      .subscribe((data: any) => this.roles = data);
   }
 
 }

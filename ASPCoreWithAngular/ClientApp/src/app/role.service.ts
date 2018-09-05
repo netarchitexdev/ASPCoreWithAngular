@@ -8,18 +8,24 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class RoleService {
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+  constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
   }
 
-  getRoles() {
-    return this.http.get(this.baseUrl + 'api/role')
-      .map((response: Response) => JSON.stringify(response))
-      .catch(this.errorHandler);
+  public get() {
+    // Get all role data
+    return this.httpClient.get<IRole>(this.baseUrl + 'api/Role');
+      //.map(res => res);
+      //.catch(this.errorHandler);
   }
-
+   
   errorHandler(error: Response) {
-    console.log(error);
+    //console.log(error);
     return Observable.throw(error);
   }
 
+}
+
+export interface IRole {
+  RoleId: string;
+  RoleName: string;
 }

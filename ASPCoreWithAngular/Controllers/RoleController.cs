@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ASPCoreWithAngular.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     public class RoleController : Controller
     {
@@ -23,9 +24,21 @@ namespace ASPCoreWithAngular.Controllers
         [HttpGet]
         public async Task<IActionResult> GetRoles()
         {
-            var roles = await _db.GetAllRoles();
+            try
+            {
+                var roles = await _db.GetAllRoles();
+                throw new Exception();
+                return Ok(roles);
+            }
+            catch
+            {
+                return HandleError();
+            }            
+        }
 
-            return Ok(roles);
+        private StatusCodeResult HandleError()
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
         //// GET: api/Roles/5
