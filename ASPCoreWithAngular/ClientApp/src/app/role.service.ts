@@ -12,12 +12,13 @@ export class RoleService {
   }
 
   // Get all role data
-  public getAll(): Observable<any> { 
+  public getAll(): Observable<any> {    
     return this.httpClient
       .get(this.baseUrl + 'api/Role')
       .map(
        // Successful responses call the first callback.
       data => {
+        if (data != null) throw new Error("error on client!");
         return data;
       },
       // Errors will call this callback instead:
