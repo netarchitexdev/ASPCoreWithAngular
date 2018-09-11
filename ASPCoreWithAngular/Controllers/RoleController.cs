@@ -27,18 +27,18 @@ namespace ASPCoreWithAngular.Controllers
             try
             {
                 var roles = await _db.GetAllRoles();
-                throw new Exception();
+                //throw new Exception();
                 return Ok(roles);
             }
-            catch
+            catch(Exception ex)
             {
-                return HandleError();
+                return HandleError(ex);
             }            
         }
 
-        private StatusCodeResult HandleError()
+        private ObjectResult HandleError(Exception ex)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            return StatusCode(StatusCodes.Status500InternalServerError, ex);
         }
 
         //// GET: api/Roles/5

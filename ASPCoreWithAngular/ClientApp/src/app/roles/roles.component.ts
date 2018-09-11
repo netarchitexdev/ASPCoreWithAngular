@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RoleService, IRole } from '../role.service';
+//import { error } from 'protractor';
 
 @Component({
   selector: 'app-roles',
@@ -14,18 +15,27 @@ export class RolesComponent implements OnInit {
 
   newRole: boolean;
 
-  //public roles: IRole[] = [];
+  public roles: IRole[] = [];
 
   cols: any[];
 
-  public roles: Array<any>;
+  //public roles: Array<any>;
 
   constructor(private roleService: RoleService) {
   }
 
   ngOnInit() {
-    this.roleService.get()
-      .subscribe((data: any) => this.roles = data);
+
+    this.roleService.getAll()
+      .subscribe((data: any) => {
+        this.roles = data;
+      });
+
+    //this.roleService.get()
+    //  .subscribe(
+    //    data => this.roles = data,
+    //    error => console.log("error in component")
+    //  );
   }
 
 }
