@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { RolesComponent } from './roles/roles.component';
-import { RoleService } from './role.service';
+import { RoleService } from './services/role.service';
 import { HttpErrorInterceptor } from './http-error-interceptor.service';
 
 @NgModule({
@@ -27,7 +27,6 @@ import { HttpErrorInterceptor } from './http-error-interceptor.service';
       { path: 'roles', component: RolesComponent }
     ])
   ],
-  //providers: [RoleService, ErrorsHandler],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

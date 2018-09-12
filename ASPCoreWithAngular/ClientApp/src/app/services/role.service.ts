@@ -1,56 +1,30 @@
-//import { Injectable, Inject } from '@angular/core';
-//import { HttpClient } from '@angular/common/http';
-//import { Observable } from 'rxjs/Observable';
-//import { Router } from '@angular/router';
-//import 'rxjs/add/operator/map';
-//import 'rxjs/add/operator/catch';
-//import 'rxjs/add/observable/throw';
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
-//@Injectable()
-//export class RoleService {
-//  myAppUrl: string = "";
+@Injectable()
+export class RoleService {
 
-//  constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-//    this.myAppUrl = baseUrl;
-//  }
+  constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+  }
 
-//  getRoles() {
-//    return this._http.get(this.myAppUrl + 'api/Role/Index')
-//      .map((response: Response) => JSON.stringify(response))
-//      .catch(this.errorHandler);
-//  }
+  // Get all role data
+  public getAll(): Observable<any> {    
+    return this.httpClient
+      .get(this.baseUrl + 'api/Role')
+      .map(data => {
+        //if (data != null) throw new Error("error on client!"); // TODO: This is test code only!
+        return data;
+      }
+    );
+  }
 
-//  getRoleById(id: number) {
-//    return this._http.get(this.myAppUrl + "api/Role/Details/" + id)
-//      .map((response: Response) => response.json())
-//      .catch(this.errorHandler)
-//  }
+}
 
-//  saveRole(role) {
-//    return this._http.post(this.myAppUrl + 'api/Role/Create', role)
-//      .map((response: Response) => response.json())
-//      .catch(this.errorHandler)
-//  }
-
-//  updateRole(role) {
-//    return this._http.put(this.myAppUrl + 'api/Role/Edit', role)
-//      .map((response: Response) => response.json())
-//      .catch(this.errorHandler);
-//  }
-
-//  deleteRole(id) {
-//    return this._http.delete(this.myAppUrl + "api/Role/Delete/" + id)
-//      .map((response: Response) => response.json())
-//      .catch(this.errorHandler);
-//  }
-
-//  errorHandler(error: Response) {
-//    console.log(error);
-//    return Observable.throw(error);
-//  }
-//}
-
-//interface Role {
-//  roleId: string;
-//  roleName: string;
-//}
+export interface IRole {
+  RoleId: string;
+  RoleName: string;
+}

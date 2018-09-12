@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService, IRole } from '../role.service';
+import { RoleService, IRole } from '../services/role.service';
 //import { error } from 'protractor';
 
 @Component({
   selector: 'app-roles',
-  templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.css']
+  templateUrl: './roles.component.html'
 })
 export class RolesComponent implements OnInit {
 
