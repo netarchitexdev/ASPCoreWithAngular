@@ -1,16 +1,17 @@
 <h1>Role Data</h1>
-
-<table class='table'>
-  <thead>
+<p-table [columns]="cols" [value]="roles">
+  <ng-template pTemplate="header" let-columns>
     <tr>
-      <th>Role Id</th>
-      <th>Role Name</th>
+      <th *ngFor="let col of columns">
+        {{col.header}}
+      </th>
     </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let role of roles">
-      <td>{{ role.roleId }}</td>
-      <td>{{ role.roleName }}</td>
+  </ng-template>
+  <ng-template pTemplate="body" let-role let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        {{role[col.field]}}
+      </td>
     </tr>
-  </tbody>
-</table>
+  </ng-template>
+</p-table>

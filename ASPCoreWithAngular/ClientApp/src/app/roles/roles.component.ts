@@ -16,7 +16,7 @@ export class RolesComponent implements OnInit {
 
   public roles: IRole[] = [];
 
-  cols: any[];
+  public cols: any[];
 
   //public roles: Array<any>;
 
@@ -24,6 +24,11 @@ export class RolesComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.cols = [
+      { field: 'roleId', header: 'Id' },
+      { field: 'roleName', header: 'Name' }
+    ];
 
     this.roleService.getAll()
       .subscribe((data: any) => {

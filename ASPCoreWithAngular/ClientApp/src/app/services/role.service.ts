@@ -25,6 +25,6 @@ export class RoleService {
 }
 
 export interface IRole {
-  RoleId: string;
-  RoleName: string;
+  roleId: string;
+  roleName: string;
 }
