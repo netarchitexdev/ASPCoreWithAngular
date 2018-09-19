@@ -1,9 +1,13 @@
 <h1>Role Data</h1>
-<p-table [columns]="cols" [value]="roles">
+<p-table #dt [columns]="cols" [value]="roles" sortMode="multiple" sortField="roleName">
+  <!--<ng-template pTemplate="caption">
+  </ng-template>-->
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th *ngFor="let col of columns">
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
         {{col.header}}
+        <input [ngSwitch]="col.field" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">        
+        <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
     </tr>
   </ng-template>
