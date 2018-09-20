@@ -14,10 +14,10 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-role let-columns="columns">
+    <ng-template pTemplate="body" let-row let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">
-          {{role[col.field]}}
+          {{row[col.field]}}
         </td>
       </tr>
     </ng-template>
