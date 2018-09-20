@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RoleService, IRole } from '../services/role.service';
-import { LazyLoadEvent } from 'primeng/primeng';
 
 @Component({
   selector: 'app-roles',
@@ -8,23 +7,15 @@ import { LazyLoadEvent } from 'primeng/primeng';
 })
 export class RolesComponent implements OnInit {
 
-  //role: IRole;
+  role: IRole;
 
-  //selectedRole: IRole;
+  selectedRole: IRole;
 
-  //newRole: boolean;
+  newRole: boolean;
 
-  public roles: IRole[] = [];
+  roles: IRole[] = [];
 
-  //public roles: Array<any>;
-
-  public cols: any[];
-
-  public loading: boolean;
-
-  public datasource: IRole[];
-
-  public totalRecords: number;  
+  cols: any[];
 
   constructor(private roleService: RoleService) {
   }
@@ -43,30 +34,28 @@ export class RolesComponent implements OnInit {
 
     this.roleService.getAll()
       .subscribe((data: any) => {
-        this.datasource = data;
-        this.totalRecords = this.datasource.length;
-      });
-
-    this.loading = true;
-  }
-
-  loadRolesLazy(event: LazyLoadEvent) {
-    this.loading = true;
-
-    //in a real application, make a remote request to load data using state metadata from event
-    //event.first = First row offset
-    //event.rows = Number of rows per page
-    //event.sortField = Field name to sort with
-    //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-    //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
-
-    //imitate db connection over a network
-    setTimeout(() => {
-      if (this.datasource) {
-        this.roles = this.datasource.slice(event.first, (event.first + event.rows));
-        this.loading = false;
+        this.roles = data;
       }
-    }, 1000);
+      , () => console.log('Finally'));
   }
+
+  //loadRolesLazy(event: LazyLoadEvent) {
+  //  this.loading = true;
+
+  //  //in a real application, make a remote request to load data using state metadata from event
+  //  //event.first = First row offset
+  //  //event.rows = Number of rows per page
+  //  //event.sortField = Field name to sort with
+  //  //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
+  //  //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
+
+  //  //imitate db connection over a network
+  //  setTimeout(() => {
+  //    if (this.datasource) {
+  //      this.roles = this.datasource.slice(event.first, (event.first + event.rows));
+  //      this.loading = false;
+  //    }
+  //  }, 1000);
+  //}
 
 }

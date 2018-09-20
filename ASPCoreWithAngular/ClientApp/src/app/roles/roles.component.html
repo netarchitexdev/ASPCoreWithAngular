@@ -1,22 +1,24 @@
 <h1>Role Data</h1>
-<p-table #dt [columns]="cols" [value]="roles" sortMode="multiple" sortField="roleName" [lazy]="true" (onLazyLoad)="loadRolesLazy($event)" [paginator]="true" 
-    [rows]="10" [totalRecords]="totalRecords" [loading]="loading">
-  <ng-template pTemplate="caption">
-  </ng-template>
-  <ng-template pTemplate="header" let-columns>
-    <tr>
-      <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="!col.sortable">
-        {{col.header}}
-        <input [ngSwitch]="col.field" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">        
-        <p-sortIcon [field]="col.field"></p-sortIcon>
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-role let-columns="columns">
-    <tr>
-      <td *ngFor="let col of columns">
-        {{role[col.field]}}
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+  <p-table #dt [columns]="cols" [value]="roles" sortMode="multiple" sortField="roleName" filterMatchMode="contains">
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-role let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          {{role[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
