@@ -10,13 +10,16 @@ import { HomeComponent } from './home/home.component';
 import { RolesComponent } from './roles/roles.component';
 import { RoleService } from './services/role.service';
 import { HttpErrorInterceptor } from './http-error-interceptor.service';
+import { AppInsightService } from './app-insight-service.service';
+import { BaseComponent } from './base-component/base-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    RolesComponent
+    RolesComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,7 +37,8 @@ import { HttpErrorInterceptor } from './http-error-interceptor.service';
       useClass: HttpErrorInterceptor,
       multi: true
     },
-    [RoleService]
+    RoleService,
+    AppInsightService
   ],
   bootstrap: [AppComponent]
 })

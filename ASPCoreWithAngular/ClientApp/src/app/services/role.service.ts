@@ -11,6 +11,9 @@ export class RoleService {
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
   }
 
+  ngOnInit(): void {
+  }
+
   // Get all role data
   public getAll(): Observable<any> {    
     return this.httpClient
