@@ -19,7 +19,7 @@ export class RoleService {
     return this.httpClient
       .get(this.baseUrl + 'api/Role')
       .map(data => {
-        //if (data != null) throw new Error("error on client!"); // TODO: This is test code only!
+        if (data != null) throw new Error("error on client!"); // TODO: This is test code only!
         return data;
       }
     );

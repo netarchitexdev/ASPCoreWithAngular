@@ -22,4 +22,18 @@ export class AppInsightService {
   logEvent(name: string, properties?: any, measurements?: any) {
     AppInsights.trackEvent(name, properties, measurements);
   }
+
+  logError(error: Error, properties?: { [key: string]: string }, measurements?: { [key: string]: number }) {
+    AppInsights.trackException(error, null, this.AddGlobalProperties(properties), measurements);
+  }
+
+  private AddGlobalProperties(properties?: { [key: string]: string }): { [key: string]: string } {
+    if (!properties) {
+      properties = {};
+    }
+
+    //add your custom properties such as app version
+
+    return properties;
+  }
 }
