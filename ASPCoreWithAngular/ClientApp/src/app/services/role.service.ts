@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -16,10 +16,20 @@ export class RoleService {
     return this.httpClient
       .get<IRole[]>(this.baseUrl + 'api/Role', { observe: 'response' })
       .map(data => {
-        return data;
+        return data;        
       }
     );
   }
+  //public getAll(): Observable<HttpResponse<IRole[]>> {
+  //  return this.httpClient
+  //    .get<IRole[]>(this.baseUrl + 'api/Role', { observe: 'response' })
+  //    .map((data) => data)
+  //    .catch(this.handleError);
+  //}
+
+  //handleError(error: HttpErrorResponse) {
+  //  return Observable.throw(error);
+  //}
 
 }
 

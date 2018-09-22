@@ -12,12 +12,13 @@ export class RolesComponent extends BaseComponent implements OnInit {
 
   cols: any[];
 
+  statusMessage: string;
+
   constructor(private roleService: RoleService) {
     super();
   }
 
   ngOnInit() {
-
     this.cols = [
       { field: 'roleId', header: 'Id' },
       { field: 'roleName', header: 'Name' }
@@ -27,6 +28,14 @@ export class RolesComponent extends BaseComponent implements OnInit {
       .subscribe(resp => {
         this.roles = resp.body;
       });
+
+    //this.roleService.getAll()
+    //  .subscribe((resp) => this.roles = resp.body,
+    //  (error) => {
+    //    this.statusMessage = 'Problem with the service. Please try again later.'
+    //  },
+    //  () => { this.statusMessage = 'done'; }
+    //);
   }
 
 }

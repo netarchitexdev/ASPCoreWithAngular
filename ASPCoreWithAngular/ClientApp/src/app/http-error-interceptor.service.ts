@@ -1,6 +1,6 @@
 import { Injectable, ReflectiveInjector } from '@angular/core';
 import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
+  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HttpResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -43,6 +43,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         // return Observable.of(new HttpResponse({body: [{name: "Default value..."}]}));
         // or simply an empty observable
         return Observable.empty<HttpEvent<any>>();
+        //return Observable.of(new HttpResponse({ body: [{ name: "Default value..." }] }));
       });
   }
   private logClientError(error: Error) {
