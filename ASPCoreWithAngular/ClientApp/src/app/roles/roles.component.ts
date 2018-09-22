@@ -24,8 +24,8 @@ export class RolesComponent extends BaseComponent implements OnInit {
     ];
 
     this.roleService.getAll()
-      .subscribe((data: any) => {
-        this.roles = data;
+      .subscribe(resp => {
+        this.roles = resp.body;
       });
   }
 

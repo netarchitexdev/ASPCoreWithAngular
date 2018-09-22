@@ -7,5 +7,9 @@ export const environment = {
   production: false,
   appInsights: {
     instrumentationKey: "f86c756e-7046-4663-8d84-b6011569cb5f"
+  },
+  appInfo: {
+    appId: "ASPCoreWithAngular",
+    appVersion: "1.0.0"
   }
 };

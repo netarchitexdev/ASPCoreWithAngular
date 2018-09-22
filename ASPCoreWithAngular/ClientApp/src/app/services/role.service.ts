@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -11,15 +11,11 @@ export class RoleService {
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
   }
 
-  ngOnInit(): void {
-  }
-
   // Get all role data
-  public getAll(): Observable<any> {    
+  public getAll(): Observable<HttpResponse<IRole[]>> {    
     return this.httpClient
-      .get(this.baseUrl + 'api/Role')
+      .get<IRole[]>(this.baseUrl + 'api/Role', { observe: 'response' })
       .map(data => {
-        if (data != null) throw new Error("error on client!"); // TODO: This is test code only!
         return data;
       }
     );

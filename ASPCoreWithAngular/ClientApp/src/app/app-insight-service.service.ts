@@ -33,6 +33,7 @@ export class AppInsightService {
     }
 
     //add your custom properties such as app version
+    properties = { "appId": environment.appInfo.appId, "appVersion": environment.appInfo.appVersion };
 
     return properties;
   }
