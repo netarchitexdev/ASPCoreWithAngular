@@ -27,14 +27,15 @@ export class AppInsightService {
     AppInsights.trackException(error, null, this.AddGlobalProperties(properties), measurements);
   }
 
-  private AddGlobalProperties(properties?: { [key: string]: string }): { [key: string]: string } {
+  private AddGlobalProperties(properties?: { [key: string]: string }) {
     if (!properties) {
       properties = {};
     }
 
     //add your custom properties such as app version
-    properties = { "appId": environment.appInfo.appId, "appVersion": environment.appInfo.appVersion };
-
+    properties["appId"] = environment.appInfo.appId;
+    properties["appVersion"] = environment.appInfo.appVersion;
+ 
     return properties;
   }
 }

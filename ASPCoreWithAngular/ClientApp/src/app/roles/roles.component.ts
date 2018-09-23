@@ -24,18 +24,17 @@ export class RolesComponent extends BaseComponent implements OnInit {
       { field: 'roleName', header: 'Name' }
     ];
 
-    this.roleService.getAll()
-      .subscribe(resp => {
-        this.roles = resp.body;
-      });
-
     //this.roleService.getAll()
-    //  .subscribe((resp) => this.roles = resp.body,
-    //  (error) => {
-    //    this.statusMessage = 'Problem with the service. Please try again later.'
-    //  },
-    //  () => { this.statusMessage = 'done'; }
-    //);
+    //  .subscribe(resp => {
+    //    this.roles = resp.body;
+    //  });
+
+    this.roleService.getAll()
+      .subscribe((resp) => this.roles = resp.body,
+      (error) => {
+        this.statusMessage = 'Problem with the service. Please try again later.'
+      }
+    );
   }
 
 }

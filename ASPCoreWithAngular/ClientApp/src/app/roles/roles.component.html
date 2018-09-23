@@ -1,27 +1,26 @@
 <h1>Role Data</h1>
-  <p-table #dt [columns]="cols" [value]="roles" sortMode="multiple" sortField="roleName" filterMatchMode="contains">
-    <ng-template pTemplate="caption">
-      <div style="text-align: right">
-        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-      </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-          {{col.header}}
-          <p-sortIcon [field]="col.field"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-row let-columns="columns">
-      <tr>
-        <td *ngFor="let col of columns">
-          {{row[col.field]}}
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-<!--<div *ngIf="roles.length == 0">
-  {{statusMessage}}
-</div>-->
+<p-table #dt [columns]="cols" [value]="roles" sortMode="multiple" sortField="roleName" filterMatchMode="contains">
+  <ng-template pTemplate="caption">
+    <div style="text-align: right">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        {{row[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+{{statusMessage}}
