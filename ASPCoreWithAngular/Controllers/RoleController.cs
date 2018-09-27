@@ -27,7 +27,7 @@ namespace ASPCoreWithAngular.Controllers
             try
             {
                 var roles = await _db.GetAllRoles();
-                //throw new Exception(); // TODO: test code only!
+                throw new Exception(); // TODO: test code only!
                 return Ok(roles);
             }
             catch(Exception ex)
