@@ -35,9 +35,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }
         // ...optionally return a default fallback value so app can continue (pick one)
         // which could be a default value (which has to be a HttpResponse here)
-        // return Observable.of(new HttpResponse({body: [{name: "Default value..."}]}));
+        //return Observable.of(new HttpResponse({ body: [{ name: "Default value..." }] }));
+        return Observable.of(new HttpResponse({ body: [{ name: "Error" }] }));
         // or simply an empty observable
-        return Observable.empty<HttpEvent<any>>();
+        //return Observable.empty<HttpEvent<any>>();
       });
   }
   private logClientError(error: HttpErrorResponse, properties?: { [key: string]: string }) {

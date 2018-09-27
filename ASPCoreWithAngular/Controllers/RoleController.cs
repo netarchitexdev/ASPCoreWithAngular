@@ -32,11 +32,11 @@ namespace ASPCoreWithAngular.Controllers
             }
             catch(Exception ex)
             {
-                return HandleError(ex);
+                return HandleUnexpectedError(ex);
             }            
         }
 
-        private ObjectResult HandleError(Exception ex)
+        private ObjectResult HandleUnexpectedError(Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex);
         }

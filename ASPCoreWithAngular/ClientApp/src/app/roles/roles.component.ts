@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RoleService, IRole } from '../services/role.service';
 import { BaseComponent } from '../base-component/base-component.component';
+import { ClientError } from '../client-error';
 
 @Component({
   selector: 'app-roles',
@@ -29,12 +30,32 @@ export class RolesComponent extends BaseComponent implements OnInit {
     //    this.roles = resp.body;
     //  });
 
+    //this.roleService.getAll()
+    //  .subscribe((resp) => {
+    //    if (resp instanceof HttpResponse) {
+    //      // A client-side or network error occurred. Handle it accordingly.
+    //      console.error("An error occurred:");
+    //    }
+    //    this.roles = resp.body;
+    //  },
+    //  (error) => {
+    //    this.statusMessage = 'Problem with the service. Please try again later.'
+    //  }
+    //);
+
     this.roleService.getAll()
-      .subscribe((resp) => this.roles = resp.body,
-      (error) => {
-        this.statusMessage = 'Problem with the service. Please try again later.'
-      }
-    );
+      .subscribe((resp) => {
+        if (resp instanceof ClientError) {
+          console.error("An error occurred in component");
+        }
+        else {
+          this.roles = resp.body;
+        }
+      },
+        (error) => {
+          this.statusMessage = 'Problem with the service. Please try again later.'
+        }
+      );
   }
 
 }
