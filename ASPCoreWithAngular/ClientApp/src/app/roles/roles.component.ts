@@ -16,11 +16,8 @@ export class RolesComponent extends BaseComponent implements OnInit {
 
   statusMessage: string;
 
-  private toasterService: ToasterService;
-
-  constructor(private roleService: RoleService, toasterService: ToasterService) {
+  constructor(private roleService: RoleService, private toasterService: ToasterService) {
     super();
-    this.toasterService = toasterService;
   }
 
   ngOnInit() {
@@ -32,17 +29,12 @@ export class RolesComponent extends BaseComponent implements OnInit {
     this.roleService.getAll()
       .subscribe((resp) => {
         if (resp instanceof ClientError) {
-          //console.error("An error occurred in component");
           this.popToast("error", "Error", "A problem occurred. Please try again later.");
         }
         else {
           this.roles = resp.body;
         }
-      },
-        (error) => {
-          this.statusMessage = 'Problem with the service. Please try again later.'
-        }
-      );
+      });
   }
 
   protected popToast(type: string, title: string, body: string) {

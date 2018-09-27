@@ -1,6 +1,6 @@
 import { Component, ReflectiveInjector } from '@angular/core';
 import { AppInsightService } from '../app-insight-service.service';
-import { ToasterService, ToasterConfig, Toast } from 'angular2-toaster';
+//import { ToasterService, ToasterConfig, Toast } from 'angular2-toaster';
 
 @Component({
   template: ''
@@ -10,11 +10,6 @@ export class BaseComponent {
   private appInsightService: AppInsightService;
 
   //private toasterService: ToasterService;
-
-  //public config1: ToasterConfig = new ToasterConfig({
-  //  positionClass: 'toast-top-right',
-  //  animation: 'fade'
-  //});
 
   constructor() {
     // Manually retrieve the monitoring service from the injector 

@@ -13,24 +13,17 @@ export class AppComponent {
 
   public config1: ToasterConfig = new ToasterConfig({
     positionClass: 'toast-top-right',
-    animation: 'fade'
+    animation: 'flyRight',
+    limit: 5,
+    newestOnTop: true,
+    mouseoverTimerStop: true
   });
 
   constructor(toasterService: ToasterService) {
     this.toasterService = toasterService;
   }
 
-  //popToast() {
-  //  var toast: Toast = {
-  //    type: 'info',
-  //    title: 'Here is a Toast Title',
-  //    body: 'Here is a Toast Body',
-  //    showCloseButton: true
-  //  };
-
-  //  this.toasterService.pop(toast);
-  //}
-
   ngOnInit(): void {
   }
+
 }

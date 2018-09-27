@@ -22,8 +22,7 @@ export class RoleService {
           return new ClientError();
         }
         return data;
-      }
-      );
+      });
   }
 
 }
