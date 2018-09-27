@@ -12,6 +12,8 @@ import { RoleService } from './services/role.service';
 import { HttpErrorInterceptor } from './http-error-interceptor.service';
 import { AppInsightService } from './app-insight-service.service';
 import { BaseComponent } from './base-component/base-component.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { BaseComponent } from './base-component/base-component.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'roles', component: RolesComponent }
     ]),
-    TableModule
+    TableModule,
+    BrowserAnimationsModule, ToasterModule.forRoot()
   ],
   providers: [
     {
@@ -38,7 +41,8 @@ import { BaseComponent } from './base-component/base-component.component';
       multi: true
     },
     RoleService,
-    AppInsightService
+    AppInsightService,
+    ToasterService
   ],
   bootstrap: [AppComponent]
 })

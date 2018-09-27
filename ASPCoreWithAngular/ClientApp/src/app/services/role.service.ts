@@ -13,15 +13,6 @@ export class RoleService {
   }
 
   // Get all role data
-  //public getAll(): Observable<HttpResponse<IRole[]>> {    
-  //  return this.httpClient
-  //    .get<IRole[]>(this.baseUrl + 'api/Role', { observe: 'response' })
-  //    .map(data => {
-  //      return data;
-  //      //throw Error; // TODO: test code only!
-  //    }
-  //  );
-  //}
   public getAll(): Observable<any> {
     return this.httpClient
       .get(this.baseUrl + 'api/Role', { observe: 'response' })

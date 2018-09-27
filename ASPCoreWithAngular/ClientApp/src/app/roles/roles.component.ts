@@ -25,24 +25,6 @@ export class RolesComponent extends BaseComponent implements OnInit {
       { field: 'roleName', header: 'Name' }
     ];
 
-    //this.roleService.getAll()
-    //  .subscribe(resp => {
-    //    this.roles = resp.body;
-    //  });
-
-    //this.roleService.getAll()
-    //  .subscribe((resp) => {
-    //    if (resp instanceof HttpResponse) {
-    //      // A client-side or network error occurred. Handle it accordingly.
-    //      console.error("An error occurred:");
-    //    }
-    //    this.roles = resp.body;
-    //  },
-    //  (error) => {
-    //    this.statusMessage = 'Problem with the service. Please try again later.'
-    //  }
-    //);
-
     this.roleService.getAll()
       .subscribe((resp) => {
         if (resp instanceof ClientError) {

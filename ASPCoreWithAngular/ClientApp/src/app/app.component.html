@@ -1,9 +1,13 @@
 <div class='container-fluid'>
-  <div class='row'>
+  <div class='row'>    
     <div class='col-sm-3'>
       <app-nav-menu></app-nav-menu>
     </div>
     <div class='col-sm-9 body-content'>
+      <div>
+        <toaster-container [toasterconfig]="config1"></toaster-container>
+        <button (click)="popToast()">pop toast</button><br />
+      </div>
       <router-outlet></router-outlet>
     </div>
   </div>
