@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { ClientError } from '../client-error';
 
 @Injectable()
 export class RoleService {
@@ -13,15 +12,14 @@ export class RoleService {
   }
 
   // Get all role data
-  public getAll(): Observable<any> {
+  public getAll(): Observable<IRole[]> {
     return this.httpClient
-      .get(this.baseUrl + 'api/Role', { observe: 'response' })
+      .get<any>(this.baseUrl + 'api/Role', { observe: 'response' })
       .map(data => {
         if (data instanceof HttpResponse && data.body[0].name == "Error") {
-          console.error("An error occurred in service");
-          return new ClientError();
+          throw new Error("An error occurred in service");
         }
-        return data;
+        return data.body;
       });
   }
 

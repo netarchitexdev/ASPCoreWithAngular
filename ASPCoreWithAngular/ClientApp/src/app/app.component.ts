@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToasterService, ToasterConfig, Toast } from 'angular2-toaster';
+import { ToasterConfig } from 'angular2-toaster';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,6 @@ import { ToasterService, ToasterConfig, Toast } from 'angular2-toaster';
 export class AppComponent {
   title = 'app';
 
-  private toasterService: ToasterService;
-
   public config1: ToasterConfig = new ToasterConfig({
     positionClass: 'toast-top-right',
     animation: 'flyRight',
@@ -18,10 +16,6 @@ export class AppComponent {
     newestOnTop: true,
     mouseoverTimerStop: true
   });
-
-  constructor(toasterService: ToasterService) {
-    this.toasterService = toasterService;
-  }
 
   ngOnInit(): void {
   }
