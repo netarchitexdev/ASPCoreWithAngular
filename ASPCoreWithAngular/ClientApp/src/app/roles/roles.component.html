@@ -1,4 +1,7 @@
 <h1>Role Data</h1>
+<p>
+  <a [routerLink]="['/create-role']">Create New</a>
+</p>
 <p-table #dt [columns]="cols" [value]="roles" sortMode="multiple" sortField="roleName" filterMatchMode="contains">
   <ng-template pTemplate="caption">
     <div style="text-align: right">

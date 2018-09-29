@@ -11,6 +11,6 @@ namespace ASPCoreWithAngular.Models
         Task<bool> UpdateRole(Role role);
         Task<IEnumerable<Role>> GetAllRoles();
         Task<Role> GetRole(Guid id);
-        Task<bool> RoleExists(Guid id);
+        Task<bool> RoleExists(string name);
     }
 }

@@ -23,19 +23,21 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request)
       .catch((err: HttpErrorResponse) => {
+        let isBackendError: boolean = false;
         if (err.error instanceof ErrorEvent) {
           // A client-side or network error occurred. Handle it accordingly.
-          console.error("An error occurred:", err.error.message);
+          //console.error("An error occurred:", err.error.message);
           this.logClientError(err);
         } else {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong,
-          console.error(`Backend returned code ${err.status}, body was: ${JSON.stringify(err.error)}`);          
+          isBackendError = true;
+          //console.error(`Backend returned code ${err.status}, body was: ${JSON.stringify(err.error)}`);          
           this.logBackendError(err);
         }
         // ...optionally return a default fallback value so app can continue (pick one)
         // which could be a default value (which has to be a HttpResponse here)
-        return Observable.of(new HttpResponse({ body: [{ name: "Error" }] }));
+        return Observable.of(new HttpResponse({ status: isBackendError ? err.status : 0, body: [{ name: "Error" }] }));
         // or simply an empty observable
         //return Observable.empty<HttpEvent<any>>();
       });

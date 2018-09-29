@@ -29,9 +29,9 @@ export class RolesComponent extends BaseComponent implements OnInit {
       .subscribe((resp) => {
         this.roles = resp;
       },
-        (error) => {
-          this.popToast("error", "Error", "A problem occurred. Please try again later.")
-        });
+      (error) => {
+        this.popToast("error", "Error", "A problem occurred. Please try again later.")
+      });
   }
 
 }

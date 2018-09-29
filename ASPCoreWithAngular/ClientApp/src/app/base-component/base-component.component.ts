@@ -7,7 +7,7 @@ import { ToasterService, Toast } from 'angular2-toaster';
 })
 export class BaseComponent {
 
-  private appInsightService: AppInsightService;
+  private appInsightService: AppInsightService; // TODO: Figure out why using injector to set this is causing Toaster error.
 
   constructor(private toasterService: ToasterService) {
     // Manually retrieve appInsightService from the injector

@@ -46,9 +46,9 @@ namespace ASPCoreWithAngular.Models
         }
 
         // Checks if role exists
-        public async Task<bool> RoleExists(Guid id)
+        public async Task<bool> RoleExists(string name)
         {
-            return await db.Role.AnyAsync(e => e.RoleId == id);
+            return await db.Role.AnyAsync(e => e.RoleName == name);
         }
     }
 }

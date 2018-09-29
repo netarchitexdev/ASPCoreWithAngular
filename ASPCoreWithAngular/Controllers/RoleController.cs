@@ -27,7 +27,7 @@ namespace ASPCoreWithAngular.Controllers
             try
             {
                 var roles = await _db.GetAllRoles();
-                throw new Exception(); // TODO: test code only!
+                //throw new Exception(); // TODO: test code only!
                 return Ok(roles);
             }
             catch(Exception ex)
@@ -96,7 +96,7 @@ namespace ASPCoreWithAngular.Controllers
         //}
 
         /// <summary>
-        /// Updates a role.
+        /// Adds a role.
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
@@ -114,7 +114,7 @@ namespace ASPCoreWithAngular.Controllers
             }
             catch (Exception)
             {
-                if (await RoleExists(role.RoleId))
+                if (await RoleExists(role.RoleName))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -153,9 +153,9 @@ namespace ASPCoreWithAngular.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private async Task<bool> RoleExists(Guid id)
+        private async Task<bool> RoleExists(string name)
         {
-            return await _db.RoleExists(id);
+            return await _db.RoleExists(name);
         }
     }
 }
