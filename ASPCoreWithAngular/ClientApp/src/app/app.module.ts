@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { RolesComponent } from './roles/roles.component';
+import { UtilityService } from './utility.service';
 import { RoleService } from './services/role.service';
 import { HttpErrorInterceptor } from './http-error-interceptor.service';
 import { AppInsightService } from './app-insight-service.service';
@@ -44,6 +45,7 @@ import { CreateRoleComponent } from './create-role/create-role.component';
       useClass: HttpErrorInterceptor,
       multi: true
     },
+    UtilityService,
     RoleService,
     AppInsightService,
     ToasterService

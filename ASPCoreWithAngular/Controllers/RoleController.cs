@@ -36,29 +36,24 @@ namespace ASPCoreWithAngular.Controllers
             }            
         }
 
-        private ObjectResult HandleUnexpectedError(Exception ex)
+        // GET: api/Roles/5
+        [HttpGet("{id}", Name = "GetRole")]
+        public async Task<IActionResult> GetRole([FromRoute] Guid id)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var role = await _db.GetRole(id);
+
+            if (role == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(role);
         }
-
-        //// GET: api/Roles/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetRole([FromRoute] Guid id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var role = await _context.Role.FindAsync(id);
-
-        //    if (role == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(role);
-        //}
 
         //// PUT: api/Roles/5
         //[HttpPut("{id}")]
@@ -112,7 +107,7 @@ namespace ASPCoreWithAngular.Controllers
             {
                 await Task.Run(() => _db.AddRole(role));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 if (await RoleExists(role.RoleName))
                 {
@@ -120,11 +115,11 @@ namespace ASPCoreWithAngular.Controllers
                 }
                 else
                 {
-                    throw;
+                    return HandleUnexpectedError(ex);
                 }
             }
 
-            return CreatedAtAction("GetRole", new { id = role.RoleId }, role);
+            return new StatusCodeResult(StatusCodes.Status201Created);
         }
 
         //// DELETE: api/Roles/5
@@ -156,6 +151,16 @@ namespace ASPCoreWithAngular.Controllers
         private async Task<bool> RoleExists(string name)
         {
             return await _db.RoleExists(name);
+        }
+
+        /// <summary>
+        /// Handles unexpected error and return error status code 500
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        private ObjectResult HandleUnexpectedError(Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex);
         }
     }
 }
