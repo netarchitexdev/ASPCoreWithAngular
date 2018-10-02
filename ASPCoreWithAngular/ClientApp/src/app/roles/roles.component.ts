@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RoleService, IRole } from '../services/role.service';
 import { BaseComponent } from '../base-component/base-component.component';
 import { ToasterService } from 'angular2-toaster';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-roles',
@@ -13,9 +14,7 @@ export class RolesComponent extends BaseComponent implements OnInit {
 
   cols: any[];
 
-  statusMessage: string;
-
-  constructor(private roleService: RoleService, toasterService: ToasterService) {
+  constructor(private roleService: RoleService, private router: Router, toasterService: ToasterService) {
     super(toasterService);
   }
 
@@ -31,7 +30,19 @@ export class RolesComponent extends BaseComponent implements OnInit {
       },
       (error) => {
         this.popToast("error", "Error", "A problem occurred. Please try again later.")
-      });
+      }
+    );
+  }
+
+  deleteRole(id: string) {
+    this.roleService.delete(id)
+      .subscribe(() => {
+        this.ngOnInit();
+      },
+      (error) => {
+        this.popToast("error", "Error", "A problem occurred. Please try again later.")
+      }
+    );
   }
 
 }

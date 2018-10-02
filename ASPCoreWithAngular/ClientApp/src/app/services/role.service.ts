@@ -24,7 +24,7 @@ export class RoleService {
       });
   }
 
-  // Create new role
+  // Create role
   public create(role: IRole): Observable<any> {
     role.roleId = this.utility.guid();
     return this.httpClient
@@ -41,6 +41,12 @@ export class RoleService {
         return data.body;
       });
   }
+
+  // Delete role
+  public delete(id: string) {
+    return this.httpClient
+      .delete<any>(this.baseUrl + 'api/Role' + '/' + id, { observe: 'response' })
+  };
 
 }
 

@@ -36,8 +36,12 @@ namespace ASPCoreWithAngular.Controllers
             }            
         }
 
-        // GET: api/Roles/5
-        [HttpGet("{id}", Name = "GetRole")]
+        /// <summary>
+        /// Get a role by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetRole([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -119,29 +123,33 @@ namespace ASPCoreWithAngular.Controllers
                 }
             }
 
+            //return CreatedAtAction("GetRole", "Role", new { id = role.RoleId }, role); // TODO: Try to get this to work!
             return new StatusCodeResult(StatusCodes.Status201Created);
         }
 
-        //// DELETE: api/Roles/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteRole([FromRoute] Guid id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        /// <summary>
+        /// Delete role by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRole([FromRoute] Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var role = await _context.Role.FindAsync(id);
-        //    if (role == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var role = await _db.GetRole(id);
+            if (role == null)
+            {
+                return NotFound();
+            }
 
-        //    _context.Role.Remove(role);
-        //    await _context.SaveChangesAsync();
+            await _db.DeleteRole(id);
 
-        //    return Ok(role);
-        //}
+            return Ok(role);
+        }
 
         /// <summary>
         /// Checks if task exists.

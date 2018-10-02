@@ -2,28 +2,35 @@
 <p>
   <a [routerLink]="['/create-role']">Create New</a>
 </p>
-<p-table #dt [columns]="cols" [value]="roles" sortMode="multiple" sortField="roleName" filterMatchMode="contains">
+<p-table #dt [value]="roles" filterMatchMode="contains" sortMode="multiple" [globalFilterFields]="['roleId','roleName']">
   <ng-template pTemplate="caption">
     <div style="text-align: right">
       <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
       <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
     </div>
   </ng-template>
-  <ng-template pTemplate="header" let-columns>
+  <ng-template pTemplate="header">
     <tr>
-      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-        {{col.header}}
-        <p-sortIcon [field]="col.field"></p-sortIcon>
+      <th [pSortableColumn]="'roleId'">
+        Id
+        <p-sortIcon [field]="'roleId'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'roleName'">
+        Name
+        <p-sortIcon [field]="'roleName'"></p-sortIcon>
+      </th>
+      <th width="15%">
+        Action
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-row let-columns="columns">
+  <ng-template pTemplate="body" let-role>
     <tr>
-      <td *ngFor="let col of columns">
-        {{row[col.field]}}
+      <td>{{role.roleId}}</td>
+      <td>{{role.roleName}}</td>
+      <td align="center">
+        <button class="btn btn-danger" (click)="deleteRole(role.roleId)">Delete</button>
       </td>
     </tr>
   </ng-template>
 </p-table>
-
-{{statusMessage}}
