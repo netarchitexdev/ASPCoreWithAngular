@@ -1,0 +1,7 @@
+<div class="container-fluid">
+  <p-dialog header="Edit Role" [(visible)]="visible" [resizable]="false" [width]="300" (window:resize)="onResize($event)" (click)="afterHide()" modal="true">
+    <div *ngIf="item">{{item.roleName}}</div>
+    <button type="button" class="btn btn-primary" (click)="visible=false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="visible=false">OK</button>
+  </p-dialog>
+</div>

@@ -16,6 +16,8 @@ import { BaseComponent } from './base-component/base-component.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { CreateRoleComponent } from './create-role/create-role.component';
+import { EditRoleDialogComponent } from './edit-role-dialog/edit-role-dialog.component';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { CreateRoleComponent } from './create-role/create-role.component';
     HomeComponent,
     RolesComponent,
     BaseComponent,
-    CreateRoleComponent
+    CreateRoleComponent,
+    EditRoleDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,7 +40,7 @@ import { CreateRoleComponent } from './create-role/create-role.component';
       { path: 'create-role', component: CreateRoleComponent }
     ]),
     TableModule,
-    BrowserAnimationsModule, ToasterModule.forRoot()
+    BrowserAnimationsModule, ToasterModule.forRoot(), DialogModule
   ],
   providers: [
     {
