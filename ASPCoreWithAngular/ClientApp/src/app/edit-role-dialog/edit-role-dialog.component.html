@@ -1,8 +1,7 @@
 <div >
   <p-dialog header="Edit Role" [(visible)]=_display [resizable]="false" [width]="300" (click)="onHide($event)" modal="true" [responsive]="true">
     <div *ngIf="item">{{_item.roleName}}</div>
-    <!--<div>{{_item.roleName}}</div>-->
-    <!--<button type="button" class="btn btn-primary" (click)="visible=false">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)="visible=false">OK</button>-->
+    <button type="button" class="btn btn-secondary btn-sm" (click)="ok()">OK</button>
+    <button type="button" class="btn btn-secondary btn-sm" (click)="cancel()">Cancel</button>
   </p-dialog>
 </div>

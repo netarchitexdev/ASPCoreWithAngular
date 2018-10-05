@@ -18,7 +18,6 @@ export class EditRoleDialogComponent implements OnInit {
   set display(value: boolean) {
     console.log('set display ' + value)
     this._display = value;
-    //this.onDisplayChange.emit(this._display);
   }
 
   @Input() get item(): IRole {
@@ -28,16 +27,21 @@ export class EditRoleDialogComponent implements OnInit {
   set item(value: IRole) {
     console.log('set role ' + value.roleName)
     this._item = value;
-    //this.onDisplayChange.emit(this._item);
   }
-
-  //@Output() onDisplayChange: EventEmitter<any> = new EventEmitter();
 
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>(true);
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ok() {
+    this.display = false;
+  }
+
+  cancel() {
+    this.display = false;
   }
 
   public onHide(e: any) {

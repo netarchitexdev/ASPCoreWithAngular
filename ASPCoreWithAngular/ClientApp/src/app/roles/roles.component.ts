@@ -18,8 +18,6 @@ export class RolesComponent extends BaseComponent implements OnInit, AfterViewIn
 
   cols: any[];
 
-  //showEditDialog: boolean = false;  
-
   message: string = "";
 
   subscription: Subscriber<any>;
@@ -79,10 +77,12 @@ export class RolesComponent extends BaseComponent implements OnInit, AfterViewIn
   }
 
   onEditDialogClosed(data: any) {
-    console.log("eventhandler");
+    console.log("onEditDialogClosed");
     console.log(data.roleName);
 
     this.subscription.unsubscribe();
+
+    this.roles = [];
 
     this.init();
   }
