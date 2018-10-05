@@ -35,6 +35,7 @@
     </tr>
   </ng-template>
 </p-table>
-<!--<edit-role-dialog [(visible)]="showEditDialog" [item]="selectedItem"></edit-role-dialog>-->
-<edit-role-dialog></edit-role-dialog>
+<!--<edit-role-dialog [(display)]="rescheduleDialogDisplay" (onClose)="onClose()" [item]="selectedItem"></edit-role-dialog>-->
+<!--<edit-role-dialog [(display)]="rescheduleDialogDisplay" (onClose)="onClose()"></edit-role-dialog>-->
+<edit-role-dialog (onClose)="onClose()"></edit-role-dialog>
 {{message}}

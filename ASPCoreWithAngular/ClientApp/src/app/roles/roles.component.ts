@@ -1,36 +1,36 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { RoleService, IRole } from '../services/role.service';
 import { BaseComponent } from '../base-component/base-component.component';
 import { ToasterService } from 'angular2-toaster';
-import { Router } from "@angular/router";
 import { EditRoleDialogComponent } from '../edit-role-dialog/edit-role-dialog.component';
+import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html'
 })
-export class RolesComponent extends BaseComponent implements OnInit {
+export class RolesComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChild(EditRoleDialogComponent)
+  private editRoleDialogComponent: EditRoleDialogComponent;
 
   roles: IRole[] = [];
 
   cols: any[];
 
-  //selectedItem: IRole;
-
-  //showEditDialog: boolean = false;
-
-  @ViewChild(EditRoleDialogComponent)
-  private editRoleDialogComponent: EditRoleDialogComponent;
-
-  subscription: any;
+  //showEditDialog: boolean = false;  
 
   message: string = "";
 
-  constructor(private roleService: RoleService, private router: Router, toasterService: ToasterService) {
+  subscription: Subscriber<any>;
+
+  constructor(private roleService: RoleService, toasterService: ToasterService) {
     super(toasterService);
   }
 
   ngOnInit() {
+    console.log("init");
+
     this.cols = [
       { field: 'roleId', header: 'Id' },
       { field: 'roleName', header: 'Name' }
@@ -43,20 +43,25 @@ export class RolesComponent extends BaseComponent implements OnInit {
       (error) => {
         this.popToast("error", "Error", "A problem occurred. Please try again later.")
       }
-    );
-
-    console.log("init");
+    );    
 
     this.message = new Date().toUTCString();
-    
+
+    this.subscription = this.editRoleDialogComponent.onClose.subscribe((data: any) => {
+      this.onEditDialogClosed(data);
+    });
+
+  }
+
+  ngAfterViewInit() {
+  }
+
+  ngOnDestroy() {
   }
 
   displayEditDialog(role: IRole) {
-    this.subscription = this.editRoleDialogComponent.visibleChange.subscribe((data: any) => {
-      this.onEditDialogClosed(data);
-    });
+    this.editRoleDialogComponent.display = true;
     this.editRoleDialogComponent.item = role;
-    this.editRoleDialogComponent.visible = true;
   }
 
   deleteRole(id: string) {
@@ -70,13 +75,19 @@ export class RolesComponent extends BaseComponent implements OnInit {
     );
   }
 
-  visibleChange(e: any) {
-    console.log(e.roleName);
+  onClose(e: any) {
   }
 
-  onEditDialogClosed(e: any) {
-    console.log(e.roleName);
+  onEditDialogClosed(data: any) {
+    console.log("eventhandler");
+    console.log(data.roleName);
+
     this.subscription.unsubscribe();
+
+    this.init();
+  }
+
+  init() {
     this.ngOnInit();
   }
 
