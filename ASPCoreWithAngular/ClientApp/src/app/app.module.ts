@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { TableModule } from 'primeng/table';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -18,6 +17,10 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { CreateRoleComponent } from './create-role/create-role.component';
 import { EditRoleDialogComponent } from './edit-role-dialog/edit-role-dialog.component';
 import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [
@@ -38,9 +41,10 @@ import { DialogModule } from 'primeng/dialog';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'roles', component: RolesComponent },
       { path: 'create-role', component: CreateRoleComponent }
-    ]),
-    TableModule,
-    BrowserAnimationsModule, ToasterModule.forRoot(), DialogModule
+    ]),    
+    BrowserAnimationsModule,
+    ToasterModule.forRoot(),
+    DialogModule, CheckboxModule, TableModule, InputTextModule, RadioButtonModule
   ],
   providers: [
     {

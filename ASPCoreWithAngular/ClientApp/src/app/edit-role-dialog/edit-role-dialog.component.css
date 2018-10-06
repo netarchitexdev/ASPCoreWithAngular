@@ -1,0 +1,16 @@
+#wrapper {
+  width: 400px;
+}
+
+#first {
+  height: 300px;
+  /*background-color: gray;*/
+}
+
+#second {
+  max-height: 200px;
+  overflow: auto;
+  margin: 4px 0 0 0;
+  /*background-color: skyblue;*/
+  /*border: solid;*/
+}

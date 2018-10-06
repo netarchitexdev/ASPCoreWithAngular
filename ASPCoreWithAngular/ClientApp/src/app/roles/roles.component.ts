@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { RoleService, IRole } from '../services/role.service';
 import { BaseComponent } from '../base-component/base-component.component';
 import { ToasterService } from 'angular2-toaster';
 import { EditRoleDialogComponent } from '../edit-role-dialog/edit-role-dialog.component';
-import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html'
 })
-export class RolesComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class RolesComponent extends BaseComponent implements OnInit, OnDestroy {
   @ViewChild(EditRoleDialogComponent)
   private editRoleDialogComponent: EditRoleDialogComponent;
 
@@ -19,8 +17,6 @@ export class RolesComponent extends BaseComponent implements OnInit, AfterViewIn
   cols: any[];
 
   message: string = "";
-
-  subscription: Subscriber<any>;
 
   constructor(private roleService: RoleService, toasterService: ToasterService) {
     super(toasterService);
@@ -44,14 +40,6 @@ export class RolesComponent extends BaseComponent implements OnInit, AfterViewIn
     );    
 
     this.message = new Date().toUTCString();
-
-    this.subscription = this.editRoleDialogComponent.onClose.subscribe((data: any) => {
-      this.onEditDialogClosed(data);
-    });
-
-  }
-
-  ngAfterViewInit() {
   }
 
   ngOnDestroy() {
@@ -73,22 +61,8 @@ export class RolesComponent extends BaseComponent implements OnInit, AfterViewIn
     );
   }
 
-  onClose(e: any) {
-  }
-
-  onEditDialogClosed(data: any) {
-    console.log("onEditDialogClosed");
-    console.log(data.roleName);
-
-    this.subscription.unsubscribe();
-
-    this.roles = [];
-
-    this.init();
-  }
-
-  init() {
-    this.ngOnInit();
+  close() {
+    console.log("closed");
   }
 
 }

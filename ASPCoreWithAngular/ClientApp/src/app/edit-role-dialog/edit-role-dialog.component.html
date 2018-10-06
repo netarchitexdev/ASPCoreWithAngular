@@ -1,7 +1,48 @@
-<div >
-  <p-dialog header="Edit Role" [(visible)]=_display [resizable]="false" [width]="300" (click)="onHide($event)" modal="true" [responsive]="true">
-    <div *ngIf="item">{{_item.roleName}}</div>
-    <button type="button" class="btn btn-secondary btn-sm" (click)="ok()">OK</button>
-    <button type="button" class="btn btn-secondary btn-sm" (click)="cancel()">Cancel</button>
+  <p-dialog header="Edit Role" [(visible)]=_display [resizable]="false" [width]="600" [blockScroll]="true" modal="true">
+    <form #f="ngForm" [formGroup]="editForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <div id="wrapper" class="col-md-6">
+        <div id="first">
+          <div>
+            <div class="form-group row">
+              <label for="roleName">Name</label>
+              <input formControlName="roleName" placeholder="Name" name="roleName" class="form-control" id="roleName" [(ngModel)]="item.roleName">
+            </div>
+          </div>
+        </div>
+        <div id="second">
+          <ng-container *ngTemplateOutlet="attributesTemplate;context:ctx"></ng-container>
+        </div>
+      </div>
+    </form>
+    <ng-template #attributesTemplate>
+      <p-table #dt [value]="attributes" filterMatchMode="contains" sortMode="multiple" [globalFilterFields]="['name']">
+        <ng-template pTemplate="caption">
+          <div style="text-align: left">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:80%">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width:10%"></th>
+            <th style="width:90%" [pSortableColumn]="'name'">
+              Id
+              <p-sortIcon [field]="'name'"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-attribute>
+          <tr>
+            <td style="width:10%">
+              <p-checkbox [(ngModel)]="attribute.isActive" binary="true"></p-checkbox>
+            </td>
+            <td style="width:90%">{{attribute.name}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-template>
+    <p-footer>
+      <button class="btn btn-secondary btn-sm" (click)="f.ngSubmit.emit()">Submit</button>
+      <button class="btn btn-secondary btn-sm" (click)="cancel()">Cancel</button>
+    </p-footer>
   </p-dialog>
-</div>

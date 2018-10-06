@@ -1,12 +1,11 @@
-<div class="col-md-6">
   <h1>Add Role</h1>
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
- 
-    <div class="form-group">
-      <label for="firstName">Name:</label>
-      <input formControlName="roleName" placeholder="Name" name="roleName" class="form-control" id="roleName">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <input formControlName="roleName" placeholder="Name" name="roleName" class="form-control" id="roleName">
+      </div>
+      <div class="form-group row">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
     </div>
-
-    <button class="btn btn-success">Update</button>
   </form>
-</div>
