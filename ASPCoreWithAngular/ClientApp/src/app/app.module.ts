@@ -21,6 +21,9 @@ import { TableModule } from 'primeng/table';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { AccordionModule } from 'primeng/accordion';
+import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     ]),    
     BrowserAnimationsModule,
     ToasterModule.forRoot(),
-    DialogModule, CheckboxModule, TableModule, InputTextModule, RadioButtonModule
+    DialogModule, CheckboxModule, TableModule, InputTextModule, RadioButtonModule, AccordionModule, CalendarModule, InputMaskModule
   ],
   providers: [
     {

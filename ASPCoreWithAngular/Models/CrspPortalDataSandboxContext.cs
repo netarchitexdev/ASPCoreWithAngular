@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ASPCoreWithAngular.Models
 {
@@ -13,7 +15,9 @@ namespace ASPCoreWithAngular.Models
         {
         }
 
+        public virtual DbSet<Attribute> Attribute { get; set; }
         public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<RoleAttribute> RoleAttribute { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,10 +30,23 @@ namespace ASPCoreWithAngular.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Attribute>(entity =>
+            {
+                entity.HasIndex(e => e.AttributeName)
+                    .HasName("UX_Attribute_AttributeName")
+                    .IsUnique();
+
+                entity.Property(e => e.AttributeName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.HasIndex(e => e.RoleName)
-                    .HasName("UQ__Role__8A2B6160FE5FCB2D");
+                    .HasName("UX_Role_RoleName")
+                    .IsUnique();
 
                 entity.Property(e => e.RoleId).ValueGeneratedNever();
 

@@ -46,11 +46,26 @@ export class EditRoleDialogComponent implements OnInit, OnDestroy {
     });
 
     this.attributes = [
-      { name: 'Attribute1', isActive: false },
+      { name: 'Attribute1', isActive: false, expiredDate: '01-01-2018' },
       { name: 'Attribute2', isActive: false },
       { name: 'Attribute3', isActive: false },
       { name: 'Attribute4', isActive: false },
-      { name: 'Attribute5', isActive: false }
+      { name: 'Attribute5', isActive: false },
+      { name: 'Attribute6', isActive: false },
+      { name: 'Attribute7', isActive: false },
+      { name: 'Attribute8', isActive: false },
+      { name: 'Attribute9', isActive: false },
+      { name: 'Attribute10', isActive: false },
+      { name: 'Attribute11', isActive: false },
+      { name: 'Attribute12', isActive: false },
+      { name: 'Attribute13', isActive: false },
+      { name: 'Attribute14', isActive: false },
+      { name: 'Attribute15', isActive: false },
+      { name: 'Attribute16', isActive: false },
+      { name: 'Attribute17', isActive: false },
+      { name: 'Attribute18', isActive: false },
+      { name: 'Attribute19', isActive: false },
+      { name: 'Attribute20', isActive: false },
     ];
   }
 
