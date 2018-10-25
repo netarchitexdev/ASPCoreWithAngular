@@ -1,6 +1,7 @@
 ﻿using ASPCoreWithAngular.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
@@ -59,40 +60,37 @@ namespace ASPCoreWithAngular.Controllers
             return Ok(role);
         }
 
-        //// PUT: api/Roles/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutRole([FromRoute] Guid id, [FromBody] Role role)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        /// <summary>
+        /// Updates a role.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        [HttpPut()]
+        public async Task<IActionResult> PutRole([FromBody] Role role)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    if (id != role.RoleId)
-        //    {
-        //        return BadRequest();
-        //    }
+            try
+            {
+                await _db.UpdateRole(role);
+            }
+            catch (Exception ex)
+            {
+                if (await RoleExists(role.RoleName))
+                {
+                    return new StatusCodeResult(StatusCodes.Status409Conflict);
+                }
+                else
+                {
+                    return HandleUnexpectedError(ex);
+                }
+            }
 
-        //    _context.Entry(role).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!RoleExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
         /// <summary>
         /// Adds a role.

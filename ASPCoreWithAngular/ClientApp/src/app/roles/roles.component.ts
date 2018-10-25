@@ -3,6 +3,7 @@ import { RoleService, IRole } from '../services/role.service';
 import { BaseComponent } from '../base-component/base-component.component';
 import { ToasterService } from 'angular2-toaster';
 import { EditRoleDialogComponent } from '../edit-role-dialog/edit-role-dialog.component';
+import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-roles',
@@ -11,6 +12,8 @@ import { EditRoleDialogComponent } from '../edit-role-dialog/edit-role-dialog.co
 export class RolesComponent extends BaseComponent implements OnInit, OnDestroy {
   @ViewChild(EditRoleDialogComponent)
   private editRoleDialogComponent: EditRoleDialogComponent;
+
+  subscription: Subscriber<any>;
 
   roles: IRole[] = [];
 
@@ -37,7 +40,9 @@ export class RolesComponent extends BaseComponent implements OnInit, OnDestroy {
       (error) => {
         this.popToast("error", "Error", "A problem occurred. Please try again later.")
       }
-    );    
+    );
+
+    this.subscription = this.editRoleDialogComponent.onClose.subscribe();
 
     this.message = new Date().toUTCString();
   }
@@ -61,8 +66,11 @@ export class RolesComponent extends BaseComponent implements OnInit, OnDestroy {
     );
   }
 
-  close() {
-    console.log("closed");
+  onClose() {
+    console.log("close");
+    this.subscription.unsubscribe();
+    this.roles = [];
+    this.ngOnInit();
   }
 
 }

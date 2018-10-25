@@ -42,6 +42,23 @@ export class RoleService {
       });
   }
 
+  // Update role
+  public update(role: IRole): Observable<any> {
+    return this.httpClient
+      .put<any>(this.baseUrl + 'api/Role', role, { observe: 'response' })
+      .map(data => {
+        if (data instanceof HttpResponse && data.body && data.body[0].name == "Error") {
+          if (data.status == 409) {
+            throw new Error("Duplicate record found.");
+          }
+          else {
+            throw new Error("An error occurred in service");
+          }
+        }
+        return data.body;
+      });
+  }
+
   // Delete role
   public delete(id: string) {
     return this.httpClient
