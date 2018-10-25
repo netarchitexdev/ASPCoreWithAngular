@@ -8,10 +8,10 @@ namespace ASPCoreWithAngular.Utility
 {
     public class JsonHelper
     {
-        public static JObject WrapJson(string jsonToWrap)
+        public static JObject WrapJsonContainer(string json, JContainer oContainer)
         {
-            var oToWrap = JObject.Parse(jsonToWrap);
-            return new JObject(oToWrap);
+            var jsonObject = JObject.Parse(json);
+            return new JObject(oContainer);
         }
     }
 }

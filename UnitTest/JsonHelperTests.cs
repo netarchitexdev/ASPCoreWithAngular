@@ -9,14 +9,14 @@ namespace UnitTest
     public class JsonHelperTests
     {
         [Fact]
-        public void CanWrapJson()
+        public void CanWrapJsonContainer()
         {
             var expected = JObject.Parse(Properties.Resources.TestSnipperNestedChild).ToString(Newtonsoft.Json.Formatting.None);
 
             var json = Properties.Resources.TestSnippetFull;
-            var oParent = JObject.Parse(json);
-            var oChild = oParent["arrayOfObj"].Parent;
-            var o = new JObject(oChild);
+            var jsonObject = JObject.Parse(json);
+            var oContainer = jsonObject["arrayOfObj"].Parent;
+            var o = new JObject(oContainer);
 
             var actual = o.ToString(Newtonsoft.Json.Formatting.None);
 
@@ -24,13 +24,13 @@ namespace UnitTest
         }
 
         [Fact]
-        public void WrapJson_CanWrapValidJson()
+        public void WrapJson_JsonContainerIsWrapped()
         {
             var expected = JObject.Parse(Properties.Resources.TestSnipperNestedChild).ToString(Newtonsoft.Json.Formatting.None);
 
             var json = Properties.Resources.TestSnippetFull;
-            var jsonToWrap = JObject.Parse(json)["arrayOfObj"].Parent.ToString();
-            var o = JsonHelper.WrapJson(jsonToWrap);
+            var oContainer = JObject.Parse(json)["arrayOfObj"].Parent;
+            var o = JsonHelper.WrapJsonContainer(json, oContainer);
 
             var actual = o.ToString(Newtonsoft.Json.Formatting.None);
 
